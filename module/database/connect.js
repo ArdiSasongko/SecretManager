@@ -12,26 +12,28 @@ async function getSecret() {
 }
 
 async function connectToDatabase() {
-  const secret = await getSecret();
-
-  const sequelize = new Sequelize("db_latihan", secret.username, "", {
-    host: "127.0.0.1",
-    port: "3306",
-    dialect: "mysql",
-  });
-
   try {
+    const secret = await getSecret();
+
+    const sequelize = new Sequelize("db_latihan", secret.username, "", {
+      host: "127.0.0.1",
+      port: "3306",
+      dialect: "mysql",
+    });
+
     await sequelize.authenticate();
     console.log("Connection to the database has been established successfully.");
+
+    return sequelize;
   } catch (error) {
     console.error("Unable to connect to the database:", error);
+    throw error;
   }
-
-  return sequelize
 }
 
-connectToDatabase();
+const sequelizeInstance = connectToDatabase();
 
 module.exports = {
+  sequelize: sequelizeInstance,
   connectToDatabase
 };
