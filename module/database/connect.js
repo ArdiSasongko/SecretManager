@@ -17,10 +17,10 @@ async function connectToDatabase() {
     const secret = await getSecret();
 
     const pool = mysql.createPool({
-      host: "127.0.0.1",
-      user: secret.username,
-      password: secret.password,
-      database: "latihan_db",
+        host: '127.0.0.1',
+        user: secret,
+        password: '',
+        database: 'latihan_db'
     });
 
     pool.getConnection((err, connection) => {
