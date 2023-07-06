@@ -26,9 +26,10 @@ async function connectToDatabase() {
   } catch (error) {
     console.error("Unable to connect to the database:", error);
   }
+
+  return sequelize
 }
 
 module.exports = {
-  sequelize,
   connectToDatabase
 };
