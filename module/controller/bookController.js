@@ -1,11 +1,12 @@
 const httpStatus = require("http-status")
-const book = require("../model/bookmodel")
 const Response = require("../model/Response")
+const { connectToDatabase } = require("../database/connect")
 
 const GetBooks = async (req,res) =>{
     try {
-        const Books = await book.findAll();
+        const query = await connectToDatabase()
 
+        const Books = await query(`SELECT * FROM books`)
         if(!Books){
             const response = new Response.Error(true, "Cant find any data")
             return res.status(httpStatus.NOT_FOUND).json(response)
@@ -20,4 +21,4 @@ const GetBooks = async (req,res) =>{
     }
 }
 
-module.exports = { GetBooks }
+module.exports =  GetBooks 
