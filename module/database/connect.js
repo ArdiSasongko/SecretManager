@@ -30,6 +30,8 @@ async function connectToDatabase() {
   return sequelize
 }
 
+connectToDatabase();
+
 module.exports = {
   connectToDatabase
 };
